@@ -30,7 +30,7 @@ def main():
 
     lowest_node_id = 6
     all_parents = tree_store.get_all_parents(lowest_node_id)
-    assert len(all_parents) == 3, all_parents
+    assert len(all_parents) == 4, all_parents
     print(f'parents for {lowest_node_id}: {all_parents}')
 
 

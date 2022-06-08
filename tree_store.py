@@ -26,7 +26,6 @@ class TreeStore:
         # будем хранить элементы в dict'е, т.к брать элементы по id
         # будет очень быстро (O(1)) и удобно
         self.nodes_map = {item['id']: Node(**item) for item in items}
-
         self._set_parents()
 
     def _set_parents(self) -> None:
@@ -49,9 +48,8 @@ class TreeStore:
         child = self.get_item(child_id)
         parents = []
 
-        if child:
-            while child.parent_id:
-                parent = self.get_item(child.parent_id)
-                parents.append(parent)
-                child = parent
+        while child:
+            parents.append(child)
+            parent = self.get_item(child.parent_id)
+            child = parent
         return parents
