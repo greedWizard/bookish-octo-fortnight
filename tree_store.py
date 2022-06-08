@@ -23,7 +23,7 @@ class TreeStore:
         if not items:
             items = []
 
-        # будем хранить элементы в dict'е, т.к брать элементы по индексу
+        # будем хранить элементы в dict'е, т.к брать элементы по id
         # будет очень быстро (O(1)) и удобно
         self.nodes_map = {item['id']: Node(**item) for item in items}
 
@@ -31,8 +31,9 @@ class TreeStore:
 
     def _set_parents(self) -> None:
         for node in self.nodes_map.values():
-            if node.parent_id:
-                self.nodes_map[node.parent_id].children.append(node)
+            parent = self.get_item(node.parent_id)
+            if parent:
+                parent.children.append(node)
         
     def get_all(self):
         return [value for value in self.nodes_map.values()]
@@ -47,7 +48,6 @@ class TreeStore:
     def get_all_parents(self, child_id: int) -> list[Node]:
         child = self.get_item(child_id)
         parents = []
-
 
         if child:
             while child.parent_id:

@@ -4,8 +4,6 @@ from tree_store import TreeStore
 
 
 def main():
-    raw_data = []
-    
     try:
         with open('data.json', 'rt') as data_file:
             raw_data = json.load(data_file)
